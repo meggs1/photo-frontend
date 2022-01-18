@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchPosts } from '../actions/posts.js'
+import Form from '../components/posts/Form'
 
 class App extends Component {
 
@@ -26,12 +27,14 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 
-
   render() {
     console.log('state', this.state)
     console.log('props', this.props)
     return(
-      <h1>Hello world</h1>
+      <div>
+        <h1>Hello world</h1>
+        <Form />
+      </div>
     )
   }
 }
