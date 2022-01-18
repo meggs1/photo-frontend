@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { fetchPosts } from '../actions/posts.js'
 
 class App extends Component {
 
@@ -8,8 +11,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchPosts()
     this.fetchUsers()
-    this.fetchPosts()
   }
 
   fetchUsers() {
@@ -23,23 +26,26 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 
-  fetchPosts() {
-    fetch("http://localhost:3000/posts")
-    .then(resp => resp.json())
-    .then(json => {
-      this.setState({
-        posts: json
-      })
-    })
-    .catch(err => console.log(err))
-  }
 
   render() {
-    console.log(this.state)
+    console.log('state', this.state)
+    console.log('props', this.props)
     return(
       <h1>Hello world</h1>
     )
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(fetchPosts())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
