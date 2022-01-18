@@ -17,22 +17,40 @@ class Form extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault()
         const post = this.state
-        this.props.addPost(post)
+        const image = document.getElementById('image')
+        
+        if (image.files[0]) {
+            console.log(image.files[0])
+          const formData = new FormData()
+          const upload_file = image.files[0]
+          formData.append('post[image]', upload_file)
+          formData.append('post[caption]', this.state.caption)
+          formData.append('post[user_id]', post.userId)
+          this.props.addPost(formData)
+        }
     }
     
     render() {
         console.log('form props', this.props)
         return(
             <form onSubmit={this.handleOnSubmit}>
-            <p>Caption:</p>
-            <textarea
-              type="text"
-              name="caption"
-              value={this.state.caption}
-              onChange={(e) => this.handleOnChange(e)} 
-            />
-          <br />
-          <input type='submit' />
+                <input 
+                    type="file"
+                    id="image" 
+                    name="image"
+                    accept="image/png, image/jpeg"
+                />
+
+                <p>Caption:</p>
+                <textarea
+                    type="text"
+                    name="caption"
+                    value={this.state.caption}
+                    onChange={(e) => this.handleOnChange(e)} 
+                />
+                <br />
+                <p>user id: {this.state.userId} </p>
+            <input type='submit' />
           </form>
         )
     }
@@ -41,7 +59,7 @@ class Form extends Component {
 
 const mapDispatchToProps = dispatch => {
     return { 
-        addPost: (post) => dispatch(addPost(post))
+        addPost: (formData) => dispatch(addPost(formData))
     }
 }
 

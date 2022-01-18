@@ -11,31 +11,22 @@ export function fetchPosts() {
     }
 }
 
-export const addPost = (post) => {
+export const addPost = (formData) => {
     return (dispatch) => {
-      fetch(baseURL, {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          post: {
-            caption: post.caption,
-            user_id: post.userId
-          }
-        })
-      })
+        const configurableObj = {
+            method: "POST",
+            // don't have to use JSON.stringify
+            body: formData
+        }
+      fetch(baseURL, configurableObj)
       .then(resp =>
         resp.json()
         .then(data => ({ data, resp })))
         .then(({ data, resp }) =>  {
         if (resp.ok) {
-          dispatch({ type: "ADD_POST", payload: data })
+            dispatch({ type: "ADD_POST", payload: data })
         } else {
-        //   dispatch({ type: "NOT_AUTHENTICATED" })
-        //   return Promise.reject(resp)
-        console.log(resp)
+            console.log(resp.body)
         }
       })
       .catch(err => console.log(err))
