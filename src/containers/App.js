@@ -3,13 +3,11 @@ import React, { Component } from "react";
 class App extends Component {
 
   state = {
-    users: [],
-    posts: []
+    users: []
   }
 
   componentDidMount() {
     this.fetchUsers()
-    this.fetchPosts()
   }
 
   fetchUsers() {
@@ -22,17 +20,6 @@ class App extends Component {
     })
   }
 
-  fetchPosts() {
-    fetch("http://localhost:3000/posts")
-    .then(resp => resp.json())
-    .then(json => {
-      console.log(json)
-      this.setState({
-        posts: json
-      })
-    })
-  }
-  
   render() {
     console.log(this.state)
     return(
