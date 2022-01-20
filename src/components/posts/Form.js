@@ -21,13 +21,14 @@ class Form extends Component {
         
         if (image.files[0]) {
             console.log(image.files[0])
-          const formData = new FormData()
-          const upload_file = image.files[0]
-          formData.append('post[image]', upload_file)
-          formData.append('post[caption]', this.state.caption)
-          formData.append('post[user_id]', post.userId)
-          this.props.addPost(formData)
+            const formData = new FormData()
+            const upload_file = image.files[0]
+            formData.append('post[image_file]', upload_file)
+            formData.append('post[caption]', this.state.caption)
+            formData.append('post[user_id]', post.userId)
+            this.props.addPost(formData)
         }
+        // add else
     }
     
     render() {

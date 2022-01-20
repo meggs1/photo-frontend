@@ -31,4 +31,4 @@ export const addPost = (formData) => {
       })
       .catch(err => console.log(err))
     }
-  }
+}

@@ -30,10 +30,14 @@ class App extends Component {
   render() {
     console.log('state', this.state)
     console.log('props', this.props)
+    const lastPost = this.props.posts.slice(-1)[0]
+    console.log(lastPost)
     return(
       <div>
         <h1>Hello world</h1>
         <Form />
+        <img src={`http://localhost:3000${lastPost.image_url}`}></img>
+        <p>{lastPost.caption}</p>
       </div>
     )
   }
