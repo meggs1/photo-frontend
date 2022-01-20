@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { fetchPosts } from '../actions/posts.js'
 import Form from '../components/posts/Form'
+import Post from '../components/posts/Post'
 
 class App extends Component {
 
@@ -36,8 +37,7 @@ class App extends Component {
       <div>
         <h1>Hello world</h1>
         <Form />
-        <img src={`http://localhost:3000${lastPost.image_url}`}></img>
-        <p>{lastPost.caption}</p>
+        <Post post={lastPost}/>
       </div>
     )
   }
