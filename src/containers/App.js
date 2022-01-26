@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import '../App.css';
 
 import { fetchPosts } from '../actions/posts.js'
 import Form from '../components/posts/Form'
 import Post from '../components/posts/Post'
+
 
 class App extends Component {
 
