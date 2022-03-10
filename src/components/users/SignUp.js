@@ -1,0 +1,15 @@
+import { Component } from "react";
+
+class SignUp extends Component {
+    
+    render() {
+        return(
+            <div>
+                <h1> User Sign Up Page</h1>
+            </div>
+        )
+    }
+}
+
+
+export default SignUp
