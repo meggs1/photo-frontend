@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import '../App.css';
 
 import { fetchPosts } from '../actions/posts.js'
@@ -38,7 +39,11 @@ class App extends Component {
     return(
       <div>
         <h1>Hello world</h1>
-        <Form />
+        <div>
+        <BrowserRouter>
+          <Form />
+        </BrowserRouter>
+        </div>
         <Post post={lastPost}/>
       </div>
     )
