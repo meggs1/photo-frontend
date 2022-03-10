@@ -8,6 +8,7 @@ import Form from '../components/posts/Form'
 import Post from '../components/posts/Post'
 import Login from '../components/users/Login'
 import SignUp from '../components/users/SignUp'
+import Profile from '../components/users/Profile'
 
 
 class App extends Component {
@@ -45,11 +46,16 @@ class App extends Component {
           <BrowserRouter>
             <Link to="form">Add new Photo</Link>
             <Link to="lastpost">View Last Upload</Link>
+            <Link to="login">Login</Link>
+            <Link to="signup">Sign Up</Link>
+            <Link to="profile">Profile</Link>
+
             <Routes>
               <Route path="form" element={<Form />} />
               <Route path="lastpost" element={<Post post={lastPost}/>} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
+              <Route path="profile" element={<Profile />} />
             </Routes>
           </BrowserRouter>
         </div>
