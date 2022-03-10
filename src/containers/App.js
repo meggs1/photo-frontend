@@ -41,6 +41,8 @@ class App extends Component {
         <h1>Hello world</h1>
         <div>
           <BrowserRouter>
+            <Link to="form">Add new Photo</Link>
+            <Link to="lastpost">View Last Upload</Link>  
             <Routes>
               <Route path="form" element={<Form />} />
               <Route path="lastpost" element={<Post post={lastPost}/>} />
