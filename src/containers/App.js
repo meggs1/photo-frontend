@@ -6,6 +6,7 @@ import '../App.css';
 import { fetchPosts } from '../actions/posts.js'
 import Form from '../components/posts/Form'
 import Post from '../components/posts/Post'
+import Login from '../components/users/Login'
 
 
 class App extends Component {
@@ -42,10 +43,11 @@ class App extends Component {
         <div>
           <BrowserRouter>
             <Link to="form">Add new Photo</Link>
-            <Link to="lastpost">View Last Upload</Link>  
+            <Link to="lastpost">View Last Upload</Link>
             <Routes>
               <Route path="form" element={<Form />} />
               <Route path="lastpost" element={<Post post={lastPost}/>} />
+              <Route path="login" element={<Login />} />
             </Routes>
           </BrowserRouter>
         </div>
