@@ -17,7 +17,7 @@ class Post extends Component {
             )
         } else {
             // need to add loading to reducer
-            return(
+            return (
                 <div>
                     No Post
                 </div>

@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000/posts'
+const baseURL = 'http://localhost:3001/posts'
 
 export function fetchPosts() {
     return (dispatch) => {

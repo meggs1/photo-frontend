@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import axios from 'axios';
 import '../App.css';
 
 import { fetchPosts } from '../actions/posts.js'
@@ -15,28 +16,57 @@ class App extends Component {
 
   state = {
     users: [],
-    posts: []
+    posts: [],
+    isLoggedIn: false,
+    user: {}
   }
 
   componentDidMount() {
+    this.loginStatus()
     this.props.fetchPosts()
-    this.fetchUsers()
+    // this.fetchUsers()
   }
 
-  fetchUsers() {
-    fetch("http://localhost:3000/users")
-    .then(resp => resp.json())
-    .then(json => {
-      this.setState({
-        users: json
-      })
+  // fetchUsers() {
+  //   fetch("http://localhost:3000/users")
+  //   .then(resp => resp.json())
+  //   .then(json => {
+  //     this.setState({
+  //       users: json
+  //     })
+  //   })
+  //   .catch(err => console.log(err))
+  // }
+
+  loginStatus = () => {
+    axios.get('http://localhost:3001/logged_in', {withCredentials: true})    
+    .then(response => {
+      if (response.data.logged_in) {
+        this.handleLogin(response)
+      } else {
+        this.handleLogout()
+      }
     })
-    .catch(err => console.log(err))
+    .catch(error => console.log('api errors:', error))
+  };
+
+  handleLogin = (data) => {
+    this.setState({
+      isLoggedIn: true,
+      user: data.user
+    })
+  }
+
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      user: {}
+    })
   }
 
   render() {
-    console.log('state', this.state)
-    console.log('props', this.props)
+    // console.log('state', this.state)
+    // console.log('props', this.props)
     const lastPost = this.props.posts.slice(-1)[0]
     console.log(lastPost)
     return(
