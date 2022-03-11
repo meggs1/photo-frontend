@@ -10,7 +10,7 @@ class Post extends Component {
             return(
                 <div>
                     Post
-                    <img src={`http://localhost:3000${lastPost.image_url}`} />
+                    <img src={`http://localhost:3001${lastPost.image_url}`} />
                     <p>{lastPost.user}</p>
                     <p>{lastPost.caption}</p>
                 </div>

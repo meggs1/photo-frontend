@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import { connect } from "react-redux";
+import { signUp } from "../../actions/users"
 
 class SignUp extends Component {
 
+    
     state = { 
         username: '',
         email: '',
@@ -17,12 +19,39 @@ class SignUp extends Component {
         [name]: value
         })
     }
-    
+
     handleSubmit = (event) => {
         event.preventDefault()
+        const {username, email, password, password_confirmation} = this.state
+        let user = {
+            username: username,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation
+        }
+        this.props.signUp(user)
     }
 
+    redirect = () => {
+        this.props.history.push('/')
+    }
+
+    handleErrors = () => {
+        return (
+        <div>
+            <ul>
+                {this.state.errors.map((error) => {
+                    return (<li key={error}> {error}</li>) 
+                })}
+            </ul> 
+        </div>
+        )
+    };
+
+
     render() {
+        console.log('signup props', this.props)
+        console.log('signup state', this.state)
         const {username, email, password, password_confirmation} = this.state
         return (
             <div>
@@ -66,4 +95,16 @@ class SignUp extends Component {
         )
     }
 }
-export default SignUp;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      signUp: (user) => dispatch(signUp(user))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

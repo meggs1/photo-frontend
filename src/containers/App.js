@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../App.css';
 
 import { fetchPosts } from '../actions/posts.js'
+
 import Form from '../components/posts/Form'
 import Post from '../components/posts/Post'
 import Login from '../components/users/Login'
@@ -24,19 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.loginStatus()
     this.props.fetchPosts()
-    // this.fetchUsers()
   }
-
-  // fetchUsers() {
-  //   fetch("http://localhost:3000/users")
-  //   .then(resp => resp.json())
-  //   .then(json => {
-  //     this.setState({
-  //       users: json
-  //     })
-  //   })
-  //   .catch(err => console.log(err))
-  // }
 
   loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', {withCredentials: true})    
@@ -50,19 +39,19 @@ class App extends Component {
     .catch(error => console.log('api errors:', error))
   };
 
-  handleLogin = (data) => {
-    this.setState({
-      isLoggedIn: true,
-      user: data.user
-    })
-  }
+  // handleLogin = (data) => {
+  //   this.setState({
+  //     isLoggedIn: true,
+  //     user: data.user
+  //   })
+  // }
 
-  handleLogout = () => {
-    this.setState({
-      isLoggedIn: false,
-      user: {}
-    })
-  }
+  // handleLogout = () => {
+  //   this.setState({
+  //     isLoggedIn: false,
+  //     user: {}
+  //   })
+  // }
 
   render() {
     // console.log('state', this.state)
@@ -98,7 +87,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts
+    posts: state.posts,
+    user: state.user
   }
 }
 
