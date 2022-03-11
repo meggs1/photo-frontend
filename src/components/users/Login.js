@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { login } from "../../actions/users";
 
 class Login extends Component {
     constructor(props) {
@@ -32,18 +32,7 @@ class Login extends Component {
           password: password
         }
 
-        axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
-        .then(response => {
-          if (response.data.logged_in) {
-            this.props.handleLogin(response.data)
-            this.redirect()
-          } else {
-            this.setState({
-              errors: response.data.errors
-            })
-          }
-        })
-        .catch(error => console.log('api errors:', error))
+        this.props.login(user)
     }
 
     redirect = () => {
@@ -103,4 +92,16 @@ class Login extends Component {
         )
     }
 }
-export default connect()(Login)
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      login: (user) => dispatch(login(user))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
